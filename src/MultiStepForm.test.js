@@ -140,3 +140,52 @@ describe("successful backward step transitions", () => {
     });
   });
 });
+
+describe("unsuccessful step transitions", () => {
+  test("cannot move to step two without required data", async () => {
+    const history = createMemoryHistory();
+    render(
+      <Router history={history}>
+        <MultiStepForm />
+      </Router>
+    );
+
+    userEvent.click(screen.getByText(/next/i));
+
+    await waitFor(() => {
+      expect(history.location.pathname).not.toBe("/2");
+    });
+  });
+
+  test("cannot move to step three without required data", async () => {
+    const history = createMemoryHistory();
+    render(
+      <Router history={history}>
+        <MultiStepForm />
+      </Router>
+    );
+    history.push("2");
+
+    userEvent.click(screen.getByText(/next/i));
+
+    await waitFor(() => {
+      expect(history.location.pathname).not.toBe("/3");
+    });
+  });
+
+  test("cannot move to step four without required data", async () => {
+    const history = createMemoryHistory();
+    render(
+      <Router history={history}>
+        <MultiStepForm />
+      </Router>
+    );
+    history.push("3");
+
+    userEvent.click(screen.getByText(/next/i));
+
+    await waitFor(() => {
+      expect(history.location.pathname).not.toBe("/4");
+    });
+  });
+});
