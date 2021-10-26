@@ -85,7 +85,7 @@ export default function MultiStepForm() {
       onSubmit={(values, { resetForm }) => {
         handleSubmit(values, resetForm);
       }}
-      validationSchema={() => handleValidation(currentLocation)}
+      validationSchema={handleValidation(currentLocation)}
     >
       {({ values }) => (
         <Switch>
