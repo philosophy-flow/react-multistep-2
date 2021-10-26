@@ -1,13 +1,21 @@
-import * as yup from "yup";
+import * as Yup from "yup";
 
-export const validate1 = yup.object({
-  first: yup.string().required("First name required"),
-  last: yup.string().required("Last name required"),
-  email: yup.string().required("Email required").email("Invalid format"),
+export const validate1 = Yup.object({
+  first: Yup.string().required("Required"),
+  last: Yup.string().required("Required"),
+  email: Yup.string().required("Required").email("Invalid format"),
 });
 
-export const validate2 = yup.object({
-  location: yup.string().required("Location required"),
+export const validate2 = Yup.object({
+  address1: Yup.string().required("Required"),
+  city: Yup.string().required("Required"),
+  zipcode: Yup.string()
+    .required("Required")
+    .matches(/^[0-9]{5}(?:-[0-9]{4})?$/i, "Invalid zipcode"),
 });
 
-export const noValidation = yup.object({});
+export const validate3 = Yup.object({
+  product: Yup.string().required("Select a product"),
+});
+
+export const noValidation = Yup.object({});

@@ -30,30 +30,53 @@ describe("successful forward step transitions and form submission", () => {
 
   test("step three renders after step two", async () => {
     const history = createMemoryHistory();
-    history.push("2");
     render(
       <Router history={history}>
         <MultiStepForm />
       </Router>
     );
+    history.push("2");
 
-    userEvent.type(screen.getByLabelText(/location/i), "Anywhere");
+    userEvent.type(screen.getByLabelText(/address line 1/i), "123 Main St.");
+    userEvent.type(screen.getByLabelText(/address line 2/i), "Apt. C");
+    userEvent.type(screen.getByLabelText(/city/i), "Springfield");
+    userEvent.type(screen.getByLabelText(/zip code/i), "12345");
+
     userEvent.click(screen.getByText(/next/i));
 
     await waitFor(() => {
       expect(history.location.pathname).toBe("/3");
+      expect(screen.getByText(/product selection/i)).toBeInTheDocument();
+    });
+  });
+
+  test("step four renders after step three", async () => {
+    const history = createMemoryHistory();
+    render(
+      <Router history={history}>
+        <MultiStepForm />
+      </Router>
+    );
+    history.push("3");
+
+    userEvent.click(screen.getByLabelText("Product #2"));
+
+    userEvent.click(screen.getByText(/next/i));
+
+    await waitFor(() => {
+      expect(history.location.pathname).toBe("/4");
       expect(screen.getByText(/verify info/i)).toBeInTheDocument();
     });
   });
 
   test("successful form submision", async () => {
     const history = createMemoryHistory();
-    history.push("3");
     render(
       <Router history={history}>
         <MultiStepForm />
       </Router>
     );
+    history.push("4");
 
     userEvent.click(screen.getByText(/submit form/i));
 
@@ -66,14 +89,31 @@ describe("successful forward step transitions and form submission", () => {
 });
 
 describe("successful backward step transitions", () => {
-  test("step two renders after step three", async () => {
+  test("step three renders after step four", async () => {
     const history = createMemoryHistory();
-    history.push("3");
     render(
       <Router history={history}>
         <MultiStepForm />
       </Router>
     );
+    history.push("4");
+
+    userEvent.click(screen.getByText(/previous/i));
+
+    await waitFor(() => {
+      expect(history.location.pathname).toBe("/3");
+      expect(screen.getByText(/product selection/i)).toBeInTheDocument();
+    });
+  });
+
+  test("step two renders after step three", async () => {
+    const history = createMemoryHistory();
+    render(
+      <Router history={history}>
+        <MultiStepForm />
+      </Router>
+    );
+    history.push("3");
 
     userEvent.click(screen.getByText(/previous/i));
 
@@ -85,12 +125,12 @@ describe("successful backward step transitions", () => {
 
   test("step one renders after step two", async () => {
     const history = createMemoryHistory();
-    history.push("2");
     render(
       <Router history={history}>
         <MultiStepForm />
       </Router>
     );
+    history.push("2");
 
     userEvent.click(screen.getByText(/previous/i));
 
