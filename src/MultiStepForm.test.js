@@ -8,7 +8,7 @@ import { Router } from "react-router-dom";
 
 import MultiStepForm from "./MultiStepForm";
 
-describe("successful step transitions and form submission", () => {
+describe("successful forward step transitions and form submission", () => {
   test("step two renders after step one", async () => {
     const history = createMemoryHistory();
     render(
@@ -59,6 +59,25 @@ describe("successful step transitions and form submission", () => {
     await waitFor(() => {
       expect(window.alert).toHaveBeenCalled();
       expect(history.location.pathname).toBe("/1");
+    });
+  });
+});
+
+describe("successful backward step transitions", () => {
+  test("step two renders after step three", async () => {
+    const history = createMemoryHistory();
+    history.push("3");
+    render(
+      <Router history={history}>
+        <MultiStepForm />
+      </Router>
+    );
+
+    userEvent.click(screen.getByText(/previous/i));
+
+    await waitFor(() => {
+      expect(history.location.pathname).toBe("/2");
+      expect(screen.getByText(/location/i)).toBeInTheDocument();
     });
   });
 });
