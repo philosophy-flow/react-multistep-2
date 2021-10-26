@@ -40,7 +40,8 @@ export default function MultiStepForm() {
   };
 
   // moves user to next step, final submission sends alert and logs values
-  const handleSubmit = (values, resetForm) => {
+  const handleSubmit = (values, resetForm, setTouched) => {
+    setTouched({});
     let nextLocation;
     switch (location.pathname) {
       case "/1":
@@ -82,8 +83,8 @@ export default function MultiStepForm() {
         zipcode: "",
         product: "",
       }}
-      onSubmit={(values, { resetForm }) => {
-        handleSubmit(values, resetForm);
+      onSubmit={(values, bag) => {
+        handleSubmit(values, bag.resetForm, bag.setTouched);
       }}
       validationSchema={handleValidation(currentLocation)}
     >
