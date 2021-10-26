@@ -13,9 +13,6 @@ const Step2 = ({ handleBack }) => (
     <div className="form-control">
       <label htmlFor="address2">Address Line 2: </label>
       <Field id="address2" name="address2" />
-      <ErrorMessage name="address2">
-        {(msg) => <p className="error">{msg}</p>}
-      </ErrorMessage>
     </div>
     <div className="form-control">
       <label htmlFor="city">City: </label>

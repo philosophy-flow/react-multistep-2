@@ -42,26 +42,17 @@ export default function MultiStepForm() {
   // moves user to next step, final submission sends alert and logs values
   const handleSubmit = (values, resetForm, setTouched) => {
     setTouched({});
-    let nextLocation;
-    switch (location.pathname) {
-      case "/1":
-        nextLocation = "2";
-        break;
-      case "/2":
-        nextLocation = "3";
-        break;
-      case "/3":
-        nextLocation = "4";
-        break;
-      case "/4":
-        nextLocation = "1";
-        alert("Thanks for your submission!");
-        console.log(values);
-        resetForm();
-        break;
-      default:
-        break;
+
+    if (currentLocation === "4") {
+      const nextLocation = "1";
+      alert("Thanks for your submission!");
+      console.log(values);
+      resetForm();
+      history.push(nextLocation);
+      return;
     }
+
+    const nextLocation = (parseInt(currentLocation) + 1).toString();
     history.push(nextLocation);
   };
 
