@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik } from "formik";
 import {
   Switch,
   Route,
@@ -9,6 +9,11 @@ import {
 } from "react-router-dom";
 
 import * as validationSchemas from "./validationSchemas";
+
+import Step1 from "./Steps/Step1";
+import Step2 from "./Steps/Step2";
+import Step3 from "./Steps/Step3";
+import Step4 from "./Steps/Step4";
 
 export default function MultiStepForm() {
   const history = useHistory();
@@ -80,7 +85,7 @@ export default function MultiStepForm() {
       onSubmit={(values, { resetForm }) => {
         handleSubmit(values, resetForm);
       }}
-      validationSchema={(values) => handleValidation(currentLocation)}
+      validationSchema={() => handleValidation(currentLocation)}
     >
       {({ values }) => (
         <Switch>
@@ -107,122 +112,3 @@ export default function MultiStepForm() {
     </Formik>
   );
 }
-
-export const Step1 = () => (
-  <Form>
-    <h3>Basic Info</h3>
-    <div className="form-control">
-      <label htmlFor="first">First Name: </label>
-      <Field id="first" name="first" />
-      <ErrorMessage name="first">
-        {(msg) => <p className="error">{msg}</p>}
-      </ErrorMessage>
-    </div>
-    <div className="form-control">
-      <label htmlFor="last">Last Name: </label>
-      <Field id="last" name="last" />
-      <ErrorMessage name="last">
-        {(msg) => <p className="error">{msg}</p>}
-      </ErrorMessage>
-    </div>
-    <div className="form-control">
-      <label htmlFor="email">Email Address: </label>
-      <Field id="email" name="email" />
-      <ErrorMessage name="email">
-        {(msg) => <p className="error">{msg}</p>}
-      </ErrorMessage>
-    </div>
-
-    <button type="submit">Next</button>
-  </Form>
-);
-
-const Step2 = ({ handleBack }) => (
-  <Form>
-    <h3>Address Info</h3>
-    <div className="form-control">
-      <label htmlFor="address1">Address Line 1: </label>
-      <Field id="address1" name="address1" />
-      <ErrorMessage name="address1">
-        {(msg) => <p className="error">{msg}</p>}
-      </ErrorMessage>
-    </div>
-    <div className="form-control">
-      <label htmlFor="address2">Address Line 2: </label>
-      <Field id="address2" name="address2" />
-      <ErrorMessage name="address2">
-        {(msg) => <p className="error">{msg}</p>}
-      </ErrorMessage>
-    </div>
-    <div className="form-control">
-      <label htmlFor="city">City: </label>
-      <Field id="city" name="city" />
-      <ErrorMessage name="city">
-        {(msg) => <p className="error">{msg}</p>}
-      </ErrorMessage>
-    </div>
-    <div className="form-control">
-      <label htmlFor="zipcode">Zip Code: </label>
-      <Field id="zipcode" name="zipcode" />
-      <ErrorMessage name="zipcode">
-        {(msg) => <p className="error">{msg}</p>}
-      </ErrorMessage>
-    </div>
-
-    <button onClick={handleBack} type="button">
-      Previous
-    </button>
-    <button type="submit">Next</button>
-  </Form>
-);
-
-console.log("rendering");
-const Step3 = ({ handleBack }) => {
-  return (
-    <Form>
-      <h3>Product Selection</h3>
-      <div className="radio-group">
-        <div className="form-control">
-          <label>
-            <Field type="radio" name="product" value="Product #1" />
-            Product #1
-          </label>
-        </div>
-        <div className="form-control">
-          <label>
-            <Field type="radio" name="product" value="Product #2" />
-            Product #2
-          </label>
-        </div>
-        <div className="form-control">
-          <label>
-            <Field type="radio" name="product" value="Product #3" />
-            Product #3
-          </label>
-        </div>
-        <ErrorMessage name="product">
-          {(msg) => <p className="error">{msg}</p>}
-        </ErrorMessage>
-      </div>
-      <button onClick={handleBack} type="button">
-        Previous
-      </button>
-      <button type="submit">Next</button>
-    </Form>
-  );
-};
-
-const Step4 = ({ values, handleBack }) => {
-  return (
-    <Form>
-      <h3>Verify Info</h3>
-      <p>Name: {`${values.first} ${values.last}`} </p>
-      <p>Email Address: {values.email} </p>
-      <p>Location: {values.location} </p>
-      <button onClick={handleBack} type="button">
-        Previous
-      </button>
-      <button type="submit">Submit Form</button>
-    </Form>
-  );
-};
