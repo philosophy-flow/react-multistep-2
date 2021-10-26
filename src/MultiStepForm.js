@@ -43,6 +43,13 @@ export default function MultiStepForm() {
   const handleSubmit = (values, resetForm, setTouched) => {
     setTouched({});
 
+    /*
+    const highestCompleted = useSelector(state => state.highestCompleted)
+    if (highestCompleted < currentLocation) {
+      dispatch(updateCompletedSteps(currentLocation)
+    }
+    */
+
     let nextLocation;
     if (currentLocation === "4") {
       nextLocation = "1";
