@@ -5,3 +5,8 @@
 .form-control label {
   display: block;
 }
+
+.error {
+  margin: 0;
+  color: red;
+}

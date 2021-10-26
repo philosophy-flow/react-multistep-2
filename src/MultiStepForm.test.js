@@ -18,6 +18,8 @@ describe("successful forward step transitions and form submission", () => {
     );
 
     userEvent.type(screen.getByLabelText(/first name/i), "John");
+    userEvent.type(screen.getByLabelText(/last name/i), "Smith");
+    userEvent.type(screen.getByLabelText(/email/i), "john@test.com");
     userEvent.click(screen.getByText(/next/i));
 
     await waitFor(() => {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import {
   Switch,
   Route,
@@ -8,9 +8,23 @@ import {
   useLocation,
 } from "react-router-dom";
 
+import * as validationSchemas from "./validationSchemas";
+
 export default function MultiStepForm() {
   const history = useHistory();
   const location = useLocation();
+  const currentLocation = location.pathname.substring(1);
+
+  const handleValidation = (step) => {
+    switch (step) {
+      case "1":
+        return validationSchemas.validate1;
+      case "2":
+        return validationSchemas.validate2;
+      default:
+        return validationSchemas.noValidation;
+    }
+  };
 
   const handleSubmit = (values, resetForm) => {
     let nextLocation;
@@ -34,7 +48,6 @@ export default function MultiStepForm() {
   };
 
   const handleBack = () => {
-    const currentLocation = location.pathname.substring(1);
     const previousLocation = (parseInt(currentLocation) - 1).toString();
     history.push(previousLocation);
   };
@@ -50,6 +63,7 @@ export default function MultiStepForm() {
       onSubmit={(values, { resetForm }) => {
         handleSubmit(values, resetForm);
       }}
+      validationSchema={(values) => handleValidation(currentLocation)}
     >
       {({ values }) => (
         <Switch>
@@ -80,14 +94,23 @@ export const Step1 = () => (
     <div className="form-control">
       <label htmlFor={"first"}>First Name: </label>
       <Field id={"first"} name={"first"} />
+      <ErrorMessage name="first">
+        {(msg) => <p className="error">{msg}</p>}
+      </ErrorMessage>
     </div>
     <div className="form-control">
       <label htmlFor={"last"}>Last Name: </label>
       <Field id={"last"} name={"last"} />
+      <ErrorMessage name="last">
+        {(msg) => <p className="error">{msg}</p>}
+      </ErrorMessage>
     </div>
     <div className="form-control">
       <label htmlFor={"email"}>Email Address: </label>
       <Field id={"email"} name={"email"} />
+      <ErrorMessage name="email">
+        {(msg) => <p className="error">{msg}</p>}
+      </ErrorMessage>
     </div>
 
     <button type="submit">Next</button>
@@ -100,6 +123,9 @@ const Step2 = ({ handleBack }) => (
     <div className="form-control">
       <label htmlFor={"location"}>Location: </label>
       <Field id={"location"} name={"location"} />
+      <ErrorMessage name="location">
+        {(msg) => <p className="error">{msg}</p>}
+      </ErrorMessage>
     </div>
 
     <button onClick={handleBack} type="button">
