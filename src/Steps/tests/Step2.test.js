@@ -52,4 +52,17 @@ describe("step one validation", () => {
     });
     expect(zipcodeError).not.toBeNull();
   });
+
+  test("show zip code field validation for incorrect format", async () => {
+    const zipcode = screen.getByLabelText(/zip code/i);
+    userEvent.type(zipcode, "not a zipcode");
+    fireEvent.blur(zipcode);
+
+    let zipcodeError;
+    await waitFor(() => {
+      zipcodeError = screen.getByText(/invalid zipcode/i);
+    });
+
+    expect(zipcodeError).not.toBeNull();
+  });
 });
