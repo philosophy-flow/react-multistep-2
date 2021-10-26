@@ -138,8 +138,7 @@ const Step2 = ({ handleBack }) => (
 const Step3 = ({ values, handleBack }) => {
   return (
     <Form>
-      <p>Verify Info </p>
-      <p>----</p>
+      <h3>Verify Info</h3>
       <p>Name: {`${values.first} ${values.last}`} </p>
       <p>Email Address: {values.email} </p>
       <p>Location: {values.location} </p>

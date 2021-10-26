@@ -24,7 +24,7 @@ describe("successful forward step transitions and form submission", () => {
 
     await waitFor(() => {
       expect(history.location.pathname).toBe("/2");
-      expect(screen.getByText(/location/i)).toBeInTheDocument();
+      expect(screen.getByText(/address info/i)).toBeInTheDocument();
     });
   });
 
@@ -79,7 +79,24 @@ describe("successful backward step transitions", () => {
 
     await waitFor(() => {
       expect(history.location.pathname).toBe("/2");
-      expect(screen.getByText(/location/i)).toBeInTheDocument();
+      expect(screen.getByText(/address info/i)).toBeInTheDocument();
+    });
+  });
+
+  test("step one renders after step two", async () => {
+    const history = createMemoryHistory();
+    history.push("2");
+    render(
+      <Router history={history}>
+        <MultiStepForm />
+      </Router>
+    );
+
+    userEvent.click(screen.getByText(/previous/i));
+
+    await waitFor(() => {
+      expect(history.location.pathname).toBe("/1");
+      expect(screen.getByText(/basic info/i)).toBeInTheDocument();
     });
   });
 });
