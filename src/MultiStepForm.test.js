@@ -9,16 +9,14 @@ import { Router } from "react-router-dom";
 import MultiStepForm from "./MultiStepForm";
 
 describe("successful step transitions and form submission", () => {
-  const history = createMemoryHistory();
-  beforeEach(() => {
+  test("step two renders after step one", async () => {
+    const history = createMemoryHistory();
     render(
       <Router history={history}>
         <MultiStepForm />
       </Router>
     );
-  });
 
-  test("step two renders after step one", async () => {
     userEvent.type(screen.getByLabelText(/first name/i), "John");
     userEvent.click(screen.getByText(/next/i));
 
@@ -29,6 +27,14 @@ describe("successful step transitions and form submission", () => {
   });
 
   test("step three renders after step two", async () => {
+    const history = createMemoryHistory();
+    history.push("2");
+    render(
+      <Router history={history}>
+        <MultiStepForm />
+      </Router>
+    );
+
     userEvent.type(screen.getByLabelText(/location/i), "Anywhere");
     userEvent.click(screen.getByText(/next/i));
 
@@ -39,10 +45,17 @@ describe("successful step transitions and form submission", () => {
   });
 
   test("successful form submision", async () => {
-    window.alert = jest.fn();
+    const history = createMemoryHistory();
+    history.push("3");
+    render(
+      <Router history={history}>
+        <MultiStepForm />
+      </Router>
+    );
 
     userEvent.click(screen.getByText(/submit form/i));
 
+    window.alert = jest.fn();
     await waitFor(() => {
       expect(window.alert).toHaveBeenCalled();
       expect(history.location.pathname).toBe("/1");
