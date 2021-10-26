@@ -39,12 +39,13 @@ export default function MultiStepForm() {
     }
   };
 
-  // moves user to next step, final submission sends alert and logs values
+  // moves user to next step, final submission sends alert, resets form
   const handleSubmit = (values, resetForm, setTouched) => {
     setTouched({});
 
+    let nextLocation;
     if (currentLocation === "4") {
-      const nextLocation = "1";
+      nextLocation = "1";
       alert("Thanks for your submission!");
       console.log(values);
       resetForm();
@@ -52,7 +53,7 @@ export default function MultiStepForm() {
       return;
     }
 
-    const nextLocation = (parseInt(currentLocation) + 1).toString();
+    nextLocation = (parseInt(currentLocation) + 1).toString();
     history.push(nextLocation);
   };
 
