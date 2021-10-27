@@ -1,7 +1,7 @@
 import { INCREMENT_ACTIVE_STEP, RESET_ACTIVE_STEP } from "./constants";
 import { combineReducers } from "redux";
 
-const stepReducer = (state = 0, action) => {
+export const stepReducer = (state = 0, action) => {
   switch (action.type) {
     case INCREMENT_ACTIVE_STEP:
       return state + 1;
