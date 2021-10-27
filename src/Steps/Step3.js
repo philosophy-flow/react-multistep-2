@@ -23,6 +23,18 @@ const Step3 = ({ handleBack }) => {
             Product #3
           </label>
         </div>
+        <div className="form-control">
+          <label>
+            <Field type="radio" name="product" value="Product #4" />
+            Product #4
+          </label>
+        </div>
+        <div className="form-control">
+          <label>
+            <Field type="radio" name="product" value="Product #5" />
+            Product #5
+          </label>
+        </div>
         <ErrorMessage name="product">
           {(msg) => <p className="error">{msg}</p>}
         </ErrorMessage>
