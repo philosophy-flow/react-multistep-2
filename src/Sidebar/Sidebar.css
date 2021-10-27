@@ -1,0 +1,39 @@
+.Sidebar {
+  border-right: 1px solid black;
+  position: fixed;
+  height: 100%;
+  width: var(--sidebar-width);
+  text-align: center;
+}
+
+.Sidebar h2 {
+  padding: 1rem 0;
+  border-bottom: 1px solid black;
+}
+
+.Sidebar ul {
+  list-style-type: none;
+}
+
+.form-step {
+  padding: 20px;
+  position: relative;
+}
+
+.status-circle {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid black;
+
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #fff;
+}
+
+.status-circle.step-complete {
+  background-color: green;
+}

@@ -1,7 +1,7 @@
 import { Form, Field, ErrorMessage } from "formik";
 
 const Step2 = ({ handleBack }) => (
-  <Form>
+  <Form className="Form">
     <h3>Address Info</h3>
     <div className="form-control">
       <label htmlFor="address1">Address Line 1: </label>
@@ -29,10 +29,12 @@ const Step2 = ({ handleBack }) => (
       </ErrorMessage>
     </div>
 
-    <button onClick={handleBack} type="button">
+    <button onClick={handleBack} type="button" className="form-btn">
       Previous
     </button>
-    <button type="submit">Next</button>
+    <button type="submit" className="form-btn">
+      Next
+    </button>
   </Form>
 );
 
