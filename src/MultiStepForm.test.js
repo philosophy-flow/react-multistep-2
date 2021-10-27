@@ -6,15 +6,27 @@ import "@testing-library/jest-dom";
 import { createMemoryHistory } from "history";
 import { Router } from "react-router-dom";
 
+import { Provider } from "react-redux";
+import configureStore from "redux-mock-store";
+
 import MultiStepForm from "./MultiStepForm";
+
+const initialState = {
+  activeStep: 0,
+};
+
+const mockStore = configureStore();
+const store = mockStore(initialState);
 
 describe("successful forward step transitions and form submission", () => {
   test("step two renders after step one", async () => {
     const history = createMemoryHistory();
     render(
-      <Router history={history}>
-        <MultiStepForm />
-      </Router>
+      <Provider store={store}>
+        <Router history={history}>
+          <MultiStepForm />
+        </Router>
+      </Provider>
     );
 
     userEvent.type(screen.getByLabelText(/first name/i), "John");
@@ -31,9 +43,11 @@ describe("successful forward step transitions and form submission", () => {
   test("step three renders after step two", async () => {
     const history = createMemoryHistory();
     render(
-      <Router history={history}>
-        <MultiStepForm />
-      </Router>
+      <Provider store={store}>
+        <Router history={history}>
+          <MultiStepForm />
+        </Router>
+      </Provider>
     );
     history.push("2");
 
@@ -53,9 +67,11 @@ describe("successful forward step transitions and form submission", () => {
   test("step four renders after step three", async () => {
     const history = createMemoryHistory();
     render(
-      <Router history={history}>
-        <MultiStepForm />
-      </Router>
+      <Provider store={store}>
+        <Router history={history}>
+          <MultiStepForm />
+        </Router>
+      </Provider>
     );
     history.push("3");
 
@@ -72,9 +88,11 @@ describe("successful forward step transitions and form submission", () => {
   test("successful form submision", async () => {
     const history = createMemoryHistory();
     render(
-      <Router history={history}>
-        <MultiStepForm />
-      </Router>
+      <Provider store={store}>
+        <Router history={history}>
+          <MultiStepForm />
+        </Router>
+      </Provider>
     );
     history.push("4");
 
@@ -92,9 +110,11 @@ describe("successful backward step transitions", () => {
   test("step three renders after step four", async () => {
     const history = createMemoryHistory();
     render(
-      <Router history={history}>
-        <MultiStepForm />
-      </Router>
+      <Provider store={store}>
+        <Router history={history}>
+          <MultiStepForm />
+        </Router>
+      </Provider>
     );
     history.push("4");
 
@@ -109,9 +129,11 @@ describe("successful backward step transitions", () => {
   test("step two renders after step three", async () => {
     const history = createMemoryHistory();
     render(
-      <Router history={history}>
-        <MultiStepForm />
-      </Router>
+      <Provider store={store}>
+        <Router history={history}>
+          <MultiStepForm />
+        </Router>
+      </Provider>
     );
     history.push("3");
 
@@ -126,9 +148,11 @@ describe("successful backward step transitions", () => {
   test("step one renders after step two", async () => {
     const history = createMemoryHistory();
     render(
-      <Router history={history}>
-        <MultiStepForm />
-      </Router>
+      <Provider store={store}>
+        <Router history={history}>
+          <MultiStepForm />
+        </Router>
+      </Provider>
     );
     history.push("2");
 
@@ -145,9 +169,11 @@ describe("unsuccessful step transitions", () => {
   test("cannot move to step two without required data", async () => {
     const history = createMemoryHistory();
     render(
-      <Router history={history}>
-        <MultiStepForm />
-      </Router>
+      <Provider store={store}>
+        <Router history={history}>
+          <MultiStepForm />
+        </Router>
+      </Provider>
     );
 
     userEvent.click(screen.getByText(/next/i));
@@ -160,9 +186,11 @@ describe("unsuccessful step transitions", () => {
   test("cannot move to step three without required data", async () => {
     const history = createMemoryHistory();
     render(
-      <Router history={history}>
-        <MultiStepForm />
-      </Router>
+      <Provider store={store}>
+        <Router history={history}>
+          <MultiStepForm />
+        </Router>
+      </Provider>
     );
     history.push("2");
 
@@ -176,9 +204,11 @@ describe("unsuccessful step transitions", () => {
   test("cannot move to step four without required data", async () => {
     const history = createMemoryHistory();
     render(
-      <Router history={history}>
-        <MultiStepForm />
-      </Router>
+      <Provider store={store}>
+        <Router history={history}>
+          <MultiStepForm />
+        </Router>
+      </Provider>
     );
     history.push("3");
 

@@ -6,8 +6,8 @@ import store from "./redux/store";
 
 function App() {
   return (
-    <Provider>
-      <Router store={store}>
+    <Provider store={store}>
+      <Router>
         <div className="App">
           <MultiStepForm />
         </div>
