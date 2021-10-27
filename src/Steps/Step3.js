@@ -2,7 +2,7 @@ import { Form, Field, ErrorMessage } from "formik";
 
 const Step3 = ({ handleBack }) => {
   return (
-    <Form>
+    <Form className="Form">
       <h3>Product Selection</h3>
       <div className="radio-group">
         <div className="form-control">
@@ -27,10 +27,12 @@ const Step3 = ({ handleBack }) => {
           {(msg) => <p className="error">{msg}</p>}
         </ErrorMessage>
       </div>
-      <button onClick={handleBack} type="button">
+      <button onClick={handleBack} type="button" className="form-btn">
         Previous
       </button>
-      <button type="submit">Next</button>
+      <button type="submit" className="form-btn">
+        Next
+      </button>
     </Form>
   );
 };

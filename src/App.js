@@ -1,15 +1,17 @@
 import { BrowserRouter as Router } from "react-router-dom";
-import MultiStepForm from "./MultiStepForm";
-
 import { Provider } from "react-redux";
-import store from "./redux/store";
 
+import Sidebar from "./Sidebar/Sidebar";
+import FormContainer from "./FormContainer/FormContainer";
+
+import store from "./redux/store";
 function App() {
   return (
     <Provider store={store}>
       <Router>
         <div className="App">
-          <MultiStepForm />
+          <Sidebar />
+          <FormContainer />
         </div>
       </Router>
     </Provider>

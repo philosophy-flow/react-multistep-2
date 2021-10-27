@@ -1,3 +1,4 @@
+import "./MultiStepForm.css";
 import React, { useEffect } from "react";
 import { Formik } from "formik";
 import {
@@ -9,13 +10,13 @@ import {
 } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import * as validationSchemas from "./validationSchemas";
-import { incrementActiveStep, resetActiveStep } from "./redux/stepActions";
+import * as validationSchemas from "../validationSchemas";
+import { incrementActiveStep, resetActiveStep } from "../redux/stepActions";
 
-import Step1 from "./Steps/Step1";
-import Step2 from "./Steps/Step2";
-import Step3 from "./Steps/Step3";
-import Step4 from "./Steps/Step4";
+import Step1 from "../Steps/Step1";
+import Step2 from "../Steps/Step2";
+import Step3 from "../Steps/Step3";
+import Step4 from "../Steps/Step4";
 
 export default function MultiStepForm() {
   const history = useHistory();
@@ -49,7 +50,7 @@ export default function MultiStepForm() {
   const handleSubmit = (values, resetForm, setTouched) => {
     setTouched({});
 
-    if (activeStep < currentLocation) {
+    if (activeStep <= currentLocation) {
       dispatch(incrementActiveStep());
     }
 

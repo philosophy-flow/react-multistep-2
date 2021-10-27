@@ -1,7 +1,7 @@
 import { Form, Field, ErrorMessage } from "formik";
 
 const Step1 = () => (
-  <Form>
+  <Form className="Form">
     <h3>Basic Info</h3>
     <div className="form-control">
       <label htmlFor="first">First Name: </label>
@@ -25,7 +25,9 @@ const Step1 = () => (
       </ErrorMessage>
     </div>
 
-    <button type="submit">Next</button>
+    <button type="submit" className="form-btn">
+      Next
+    </button>
   </Form>
 );
 
