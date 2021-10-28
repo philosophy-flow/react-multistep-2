@@ -1,10 +1,4 @@
-import { LOAD_PRODUCTS, SET_PRODUCTS } from "../constants";
-
-export function loadProducts() {
-  return {
-    type: LOAD_PRODUCTS,
-  };
-}
+import { SET_PRODUCTS } from "../constants";
 
 export function setProducts(data) {
   return {

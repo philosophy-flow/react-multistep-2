@@ -1,9 +1,16 @@
 import "./Sidebar.css";
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router";
 
 export default function Sidebar() {
-  const activeStep = useSelector((state) => state.activeStep);
+  const [activeStep, setActiveStep] = useState(1);
+  const currentLocation = useLocation().pathname.substring(1);
+
+  useEffect(() => {
+    if (activeStep < currentLocation) {
+      setActiveStep(currentLocation);
+    }
+  }, [currentLocation, activeStep]);
 
   return (
     <div className="Sidebar">

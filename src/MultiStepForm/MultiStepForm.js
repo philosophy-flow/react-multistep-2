@@ -8,13 +8,9 @@ import {
   useHistory,
   useLocation,
 } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import * as validationSchemas from "../validationSchemas";
-import {
-  incrementActiveStep,
-  resetActiveStep,
-} from "../redux/actions/stepActions";
 
 import Step1 from "../Steps/Step1";
 import Step2 from "../Steps/Step2";
@@ -24,9 +20,6 @@ import Step4 from "../Steps/Step4";
 export default function MultiStepForm() {
   const history = useHistory();
   const location = useLocation();
-  const dispatch = useDispatch();
-
-  const activeStep = useSelector((state) => state.activeStep);
 
   const currentLocation = location.pathname.substring(1);
 
@@ -55,10 +48,6 @@ export default function MultiStepForm() {
   const handleSubmit = (values, resetForm, setTouched) => {
     setTouched({});
 
-    if (activeStep <= currentLocation) {
-      dispatch(incrementActiveStep());
-    }
-
     let nextLocation;
     if (currentLocation === "4") {
       nextLocation = "1";
@@ -66,7 +55,6 @@ export default function MultiStepForm() {
       console.log(values);
       resetForm();
       history.push(nextLocation);
-      dispatch(resetActiveStep());
       return;
     }
 
