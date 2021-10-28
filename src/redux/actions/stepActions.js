@@ -1,4 +1,4 @@
-import { INCREMENT_ACTIVE_STEP, RESET_ACTIVE_STEP } from "./constants";
+import { INCREMENT_ACTIVE_STEP, RESET_ACTIVE_STEP } from "../constants";
 
 export const incrementActiveStep = () => {
   return {

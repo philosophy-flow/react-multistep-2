@@ -1,20 +1,26 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
-import { Provider } from "react-redux";
+import { loadProducts } from "./redux/actions/productActions";
 
 import Sidebar from "./Sidebar/Sidebar";
 import FormContainer from "./FormContainer/FormContainer";
 
-import store from "./redux/store";
 function App() {
+  const dispatch = useDispatch();
+
+  // makes API call to fetch products via redux saga
+  useEffect(() => {
+    dispatch(loadProducts());
+  }, [dispatch]);
+
   return (
-    <Provider store={store}>
-      <Router>
-        <div className="App">
-          <Sidebar />
-          <FormContainer />
-        </div>
-      </Router>
-    </Provider>
+    <Router>
+      <div className="App">
+        <Sidebar />
+        <FormContainer />
+      </div>
+    </Router>
   );
 }
 

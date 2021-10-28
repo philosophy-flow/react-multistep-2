@@ -22,6 +22,6 @@ export default {
   },
 };
 
-export const Template = (args) => <Step3 {...args} />;
+const Template = (args) => <Step3 {...args} />;
 
 export const Default = Template.bind({});

@@ -1,5 +1,5 @@
-import { stepReducer } from "./stepReducer";
-import { incrementActiveStep, resetActiveStep } from "./stepActions";
+import stepReducer from "./stepReducer";
+import { incrementActiveStep, resetActiveStep } from "../actions/stepActions";
 
 test("should return the initial state", () => {
   expect(stepReducer(undefined, {})).toEqual(1);
