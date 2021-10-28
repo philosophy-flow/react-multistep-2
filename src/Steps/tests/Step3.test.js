@@ -10,9 +10,15 @@ import { validate3 } from "../../validationSchemas";
 
 describe("step three validation", () => {
   beforeEach(() => {
+    const mockProducts = [
+      { id: 1, title: "Product #1" },
+      { id: 2, title: "Product #2" },
+      { id: 3, title: "Product #3" },
+    ];
+
     render(
       <Formik initialValues={{ product: "" }} validationSchema={validate3}>
-        <Step3 />
+        <Step3 products={mockProducts} />
       </Formik>
     );
   });

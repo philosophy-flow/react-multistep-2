@@ -69,3 +69,7 @@
 .review-details p span {
   font-weight: bold;
 }
+
+.radio-group {
+  margin-bottom: 1rem;
+}

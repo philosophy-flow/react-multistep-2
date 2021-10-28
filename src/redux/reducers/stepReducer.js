@@ -1,5 +1,4 @@
-import { INCREMENT_ACTIVE_STEP, RESET_ACTIVE_STEP } from "./constants";
-import { combineReducers } from "redux";
+import { INCREMENT_ACTIVE_STEP, RESET_ACTIVE_STEP } from "../constants";
 
 export const stepReducer = (state = 1, action) => {
   switch (action.type) {
@@ -12,8 +11,4 @@ export const stepReducer = (state = 1, action) => {
   }
 };
 
-const rootReducer = combineReducers({
-  activeStep: stepReducer,
-});
-
-export default rootReducer;
+export default stepReducer;

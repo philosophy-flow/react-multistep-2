@@ -1,40 +1,20 @@
 import { Form, Field, ErrorMessage } from "formik";
 
-const Step3 = ({ handleBack }) => {
+const Step3 = ({ handleBack, products }) => {
+  const productInputs = products.map((p) => (
+    <div className="form-control" key={p.id}>
+      <label>
+        <Field type="radio" name="product" value={p.title} />
+        {p.title}
+      </label>
+    </div>
+  ));
+
   return (
     <Form className="Form">
       <h3>Product Selection</h3>
       <div className="radio-group">
-        <div className="form-control">
-          <label>
-            <Field type="radio" name="product" value="Product #1" />
-            Product #1
-          </label>
-        </div>
-        <div className="form-control">
-          <label>
-            <Field type="radio" name="product" value="Product #2" />
-            Product #2
-          </label>
-        </div>
-        <div className="form-control">
-          <label>
-            <Field type="radio" name="product" value="Product #3" />
-            Product #3
-          </label>
-        </div>
-        <div className="form-control">
-          <label>
-            <Field type="radio" name="product" value="Product #4" />
-            Product #4
-          </label>
-        </div>
-        <div className="form-control">
-          <label>
-            <Field type="radio" name="product" value="Product #5" />
-            Product #5
-          </label>
-        </div>
+        {productInputs}
         <ErrorMessage name="product">
           {(msg) => <p className="error">{msg}</p>}
         </ErrorMessage>

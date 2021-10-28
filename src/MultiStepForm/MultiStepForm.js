@@ -11,7 +11,10 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import * as validationSchemas from "../validationSchemas";
-import { incrementActiveStep, resetActiveStep } from "../redux/stepActions";
+import {
+  incrementActiveStep,
+  resetActiveStep,
+} from "../redux/actions/stepActions";
 
 import Step1 from "../Steps/Step1";
 import Step2 from "../Steps/Step2";
@@ -21,11 +24,13 @@ import Step4 from "../Steps/Step4";
 export default function MultiStepForm() {
   const history = useHistory();
   const location = useLocation();
-
   const dispatch = useDispatch();
+
   const activeStep = useSelector((state) => state.activeStep);
 
   const currentLocation = location.pathname.substring(1);
+
+  const products = useSelector((state) => state.products);
 
   // returns user to first page on refresh
   useEffect(() => {
@@ -104,7 +109,7 @@ export default function MultiStepForm() {
             <Step2 handleBack={handleBack} />
           </Route>
           <Route path="/3">
-            <Step3 handleBack={handleBack} />
+            <Step3 handleBack={handleBack} products={products} />
           </Route>
           <Route path="/4">
             <Step4 values={values} handleBack={handleBack} />
